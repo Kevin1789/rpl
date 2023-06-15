@@ -19,9 +19,15 @@ def procesar_votaciones(votaciones):
             resultados[participante]["sumatoria_puntaje"] += puntaje
             resultados[participante]["cantidad_puntajes"] += 1
         else:
-            resultados[participante] = {"sumatoria_puntaje": puntaje, "cantidad_puntajes": 1}
+            resultados[participante] = {"sumatoria_puntaje": puntaje,\
+                                        "cantidad_puntajes": 1}
     for participante in resultados:
-        resultados[participante]["promedio_puntaje"] = resultados[participante]["sumatoria_puntaje"]/resultados[participante]["cantidad_puntajes"]
+        resultados[participante]\
+            ["promedio_puntaje"] = \
+                resultados[participante] \
+                ["sumatoria_puntaje"]/ \
+                    resultados[participante]\
+                        ["cantidad_puntajes"]
     return resultados
 
 def listar_participantes(resultados):

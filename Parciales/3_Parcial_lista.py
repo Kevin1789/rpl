@@ -11,17 +11,21 @@ posibles_amistades(personas,intereses_afines) => ["mario","rosa"]
 posibles_amistades(personas,intereses_afines2) => []  
 """
 
-def posibles_amistades(personas, intereses_afines, intereses_afines2):
-    intereses = []
-    for intereses_comunes in personas:
-        intereses_comunes[personas] += intereses
-    if intereses_afines >= 2 in intereses:
-        return (personas, intereses_afines)
-    if intereses_afines2 >= 2 in intereses:
-        return (personas, intereses_afines2)
+def posibles_amistades(personas, intereses_afines):
+    amistades = []
+    for i in range(0, len(personas), 2):
+        nombre = personas[i]
+        intereses = personas[i+1]
+        intereses_comunes = set(intereses) & set(intereses_afines)
+        if len(intereses_comunes) >= 2:
+            amistades.append(nombre)
+    return amistades
 
-personas = ["camila",["futbol","natacion","voley","gimnasio"],"mario",["natacion","basquet","gimnasio","cine"],"rosa",["cine","natacion","teatro"]]
-intereses_afines = ["natacion","teatro","cine","tenis"]
-intereses_afines2 = ["cine","tenis","ajedrez"]
+personas = ["camila", ["futbol", "natacion", "voley", "gimnasio"],
+            "mario", ["natacion", "basquet", "gimnasio", "cine"],
+            "rosa", ["cine", "natacion", "teatro"]]
+intereses_afines = ["natacion", "teatro", "cine", "tenis"]
+intereses_afines2 = ["cine", "tenis", "ajedrez"]
 
-print(posibles_amistades(personas, intereses_afines, intereses_afines2))
+print(posibles_amistades(personas, intereses_afines))
+print(posibles_amistades(personas, intereses_afines2))

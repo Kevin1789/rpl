@@ -31,3 +31,20 @@ lista_3 = ["bares","conciertos","museo"]
 print(elegir(lista_1,lista_2,5000))
 print(elegir(lista_1,lista_3,1000))
 
+
+"----------------------------------------------------------------------------------------------------------------------"
+
+def elegir2(atracciones, actividades_deseadas, costo):
+    actividades = []
+    validar = False
+    for actividad in actividades_deseadas:
+        actividades = actividades_deseadas[actividad]
+        if (actividades in atracciones) >=3 and (costo <= MAX_COSTO):
+            validar = True
+    return validar
+
+lista_1 = ["museo","senderismo","bares","montañismo"]
+lista_2 = ["museo","bares","senderismo","conciertos"]
+lista_3 = ["bares","conciertos","museo"]
+print(elegir2(lista_1,lista_2,5000))
+print(elegir2(lista_1,lista_3,1000))

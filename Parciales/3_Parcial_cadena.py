@@ -15,47 +15,40 @@ validar("AlgOritmo$1") ---> True
 validar("AproBe-con-7") ---> True
 """
 
-def validar (cadena):
-    valido = False
-    if 6>=len(cadena)<=12:
-        valido = True
-    for letra in cadena:
-            if not letra.isupper()<=2  and not letra.islower()<=2 and not letra.isdigit()>=2 and letra not in "*-$@":
-                valido=False
-            elif letra in "áéíóúÁÉÍÓÚ":
-                valido=False
-    return (valido)
-print(validar("Algoritmo $1"))
-print(validar("Aprobé-con-7"))
-print(validar("AlgOritmo$1"))
-print(validar("AproBe-con-7"))
-
-"-----------------------------------------------------------------------------------------------------------------"
-
 def validar(clave):
-    # Debe contener entre 6 y 12 caracteres
-    if not 6 <= len(clave) <= 12:
+    # Verificar la longitud de la clave
+    if len(clave) < 6 or len(clave) > 12:
         return False
 
-    # Debe contener por lo menos dos caracteres alfabéticos en mayúscula
-    if sum(1 for c in clave if c.isupper()) < 2:
-        return False
+    # Contadores de caracteres, dígitos y símbolos
+    mayusculas = 0
+    minusculas = 0
+    digitos = 0
+    simbolos = 0
+    otros = 0
 
-    # Debe contener por lo menos dos caracteres alfabéticos en minúscula
-    if sum(1 for c in clave if c.islower()) < 2:
-        return False
+    # Verificar cada carácter de la clave
+    for caracter in clave:
+        if caracter.isalpha():
+            if caracter.isupper():
+                mayusculas += 1
+            else:
+                minusculas += 1
+        elif caracter.isdigit():
+            digitos += 1
+        elif caracter in ['*', '-', '$', '@']:
+            simbolos += 1
+        else:
+            otros += 1
 
-    # Puede contener a lo sumo dos dígitos numéricos
-    if sum(1 for c in clave if c.isdigit()) > 2:
-        return False
-
-    # Puede contener alguno de los siguientes símbolos: [*,-,$,@]
-    if not all(c.isalnum() or c in ['*', '-', '$', '@'] for c in clave):
-        return False
-
-    # Cualquier otro símbolo que no esté en el grupo indicado rechazará la validación
-    if not all(c.isalnum() or c in ['*', '-', '$', '@'] for c in clave):
+    # Verificar las restricciones de caracteres
+    if mayusculas < 2 or minusculas < 2 or digitos > 2 or simbolos == 0 or otros > 0:
         return False
 
     return True
 
+# Pruebas
+print(validar("Algoritmo $1"))  # False
+print(validar("AprObé-con-7"))  # False
+print(validar("AlgOritmo$1"))  # True
+print(validar("AproBe-con-7"))  # True

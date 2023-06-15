@@ -88,3 +88,28 @@ print(contador5("Aaaáb"))
 print(contador5("$_123*"))
 print(contador5("Algoritmos y Programación"))
 print("Fin de este modelo 5")
+
+"-----------------------------------------------------------------------------------------------------------------"
+def con_tilde(cadena):
+    tildes = "áéíóúÁÉÍÓÚ"
+    sin_tildes = "aeiouAEIOU"
+    for i in range(len(tildes)):
+        cadena = cadena.replace(tildes[i], sin_tildes[i])
+    return cadena
+
+def contador6(cadena):
+    cadena = con_tilde(cadena.lower())
+    letras = []
+    contador = 0
+    numeros = "0123456789"
+    simbolos = "$-*"
+    for caracter in cadena:
+        if caracter not in letras and caracter not in numeros and caracter not in simbolos:
+            letras.append(caracter)
+            contador += 1
+    return contador
+
+print(contador6("Aaaáb"))
+print(contador6("$_123*"))
+print(contador6("Algoritmos y Programación"))
+print("Fin de este modelo 6")

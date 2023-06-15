@@ -5,32 +5,32 @@ ejemplo:
 [["argentina", 4, "francia", 3], ["brasil", 2, "argentina", 3], ["brasil", 1, "japon", 1], ...]
 Se pide que escribas un programa en python que procese esa lista y genere un diccionario con claves pais y valor
 total_puntos. Los puntos son 3 al ganador, 1 por empate y 0 por perder. Gana el pais que hizo mas goles.
-Luego, debe listar pais-total_puntos, ordenados de mayor a menor por total_puntos. Antes igualdad de puntos, el orden indistinto.
+Luego, debe listar pais-total_puntos, ordenados de mayor a menor por total_puntos. Antes igualdad de puntos, 
+el orden indistinto.
 """
 
-def partido(lista):
-    total_goles = {}
-    puntos = 0
-    gano = puntos + 3
-    empato = puntos + 1
-    perdio = puntos
-    for pais1, pais2 in lista:
-        total_goles[pais1] = total_goles.get(pais1, 0) + puntos
-        total_goles[pais2] = total_goles.get(pais2, 0) + puntos
-        if total_goles[pais1] > total_goles[pais2]:
-            return gano
-        if total_goles[pais1] == total_goles[pais2]:
-            return empato
-        if total_goles[pais1] < total_goles[pais2]:
-            return perdio
-    return total_goles
+partidos = [["argentina", 4, "francia", 3], ["brasil", 2, "argentina", 3], ["brasil", 1, "japon", 1]]
 
-def ordenar_partidos(total_goles):
-    total_goles_or = dict(sorted(total_goles.items(), key=lambda item: item[1], reverse=True))
-    total_goles_or = dict(sorted(total_goles.items(), key=lambda item: item[1], reverse=True))
-    print(total_goles_or)
+puntos = {}
+
+for partido in partidos:
+    pais1, goles1, pais2, goles2 = partido
     
+    # Verificar el ganador o empate
+    if goles1 > goles2:
+        puntos[pais1] = puntos.get(pais1, 0) + 3
+        puntos[pais2] = puntos.get(pais2, 0)
+    elif goles1 < goles2:
+        puntos[pais1] = puntos.get(pais1, 0)
+        puntos[pais2] = puntos.get(pais2, 0) + 3
+    else:
+        puntos[pais1] = puntos.get(pais1, 0) + 1
+        puntos[pais2] = puntos.get(pais2, 0) + 1
 
-lista = [["argentina", 4, "francia", 3], ["brasil", 2, "argentina", 3], ["brasil", 1, "japon", 1]]
+# Ordenar el diccionario por los valores (total_puntos)
+puntos_ordenados = sorted(puntos.items(), key=lambda x: x[1], reverse=True)
 
-ordenar_partidos(partido(lista))
+# Imprimir pais-total_puntos ordenados de mayor a menor
+for pais, total_puntos in puntos_ordenados:
+    print(pais, "-", total_puntos)
+
